@@ -13,13 +13,16 @@ jobs:
             - run: npm install
             - run: npm test
       # setup env for sonarqube
-      - run:
-        name: Setup environment
-        command: |
-          apt update
-          apt add --no-cache zip openjdk11-jre-headless
+      - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
+      - run: docker build -t company/app: .
+      - run: docker push company/app
+#       - run:
+#         name: Build docker image and publish to Private Hub
+#         command: |
+#           apt update
+#           apt add --no-cache zip openjdk11-jre-headless
       # install sonarqube scanners
-      - sonarqube/install-engine
+      #- sonarqube/install-engine
 workflows:
     build-and-test:
       jobs:
