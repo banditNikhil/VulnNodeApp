@@ -13,7 +13,11 @@ jobs:
             - run: npm install
             - run: npm test
       # setup env for sonarqube
-      - sonarqube/setup-environment
+        - run:
+          name: Setup environment
+          command: |
+            apt update
+            apt add --no-cache zip openjdk11-jre-headless
       # install sonarqube scanners
       - sonarqube/install-engine
 workflows:
