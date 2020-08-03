@@ -13,8 +13,8 @@ jobs:
             - run: npm install
             - run: npm test
             - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-            - run: docker build -t company/app .
-            - run: docker push company/app
+            - run: docker build -t hub.klickstartonline.com/app .
+            - run: docker push hub.klickstartonline.com/app
 #       - run:
 #         name: Build docker image and publish to Private Hub
 #         command: |
