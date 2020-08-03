@@ -12,21 +12,13 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-    # setup env for sonarqube
-    description: Setup requirements
-    steps:
+      # setup env for sonarqube
       - run:
           name: Setup environment
           command: |
             apk update
             apk add --no-cache zip openjdk11-jre-headless
-    # install sonarqube scanners
-    description: Install Sonarqube scanner
-    parameters:
-      engine_version:
-        type: string
-        default: 4.2.0.1873
-    steps:
+      # install sonarqube scanners
       - run:
           name: Install Sonarqube scanner
           command: >
