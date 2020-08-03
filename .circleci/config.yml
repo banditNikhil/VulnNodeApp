@@ -12,10 +12,9 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-      # setup env for sonarqube
-      - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-      - run: docker build -t company/app: .
-      - run: docker push company/app
+            - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
+            - run: docker build -t company/app: .
+            - run: docker push company/app
 #       - run:
 #         name: Build docker image and publish to Private Hub
 #         command: |
