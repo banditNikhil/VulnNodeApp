@@ -7,7 +7,7 @@
           - checkout
           - setup_remote_docker
           - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-          - run: docker build -t hub.klickstartonline.com/app: .
+          - run: docker build -t hub.klickstartonline.com/app .
           - run: docker push hub.klickstartonline.com/app
     workflows:
       version: 2
