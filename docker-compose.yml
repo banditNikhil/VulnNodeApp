@@ -1,0 +1,6 @@
+version: '3'
+services:
+  webapp:
+    image: "hub.klickstartonline.com/app:latest"
+    ports:
+      - "8000:3000"
