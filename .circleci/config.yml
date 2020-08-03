@@ -1,27 +1,13 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
-  sonarqube: clicklogiq/sonarqube@0.0.2
 jobs:
   build-and-test:
     docker:
-      image: node:12
+      image: circleci/buildpack-deps
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
-            - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-            - run: docker build -t hub.klickstartonline.com/app .
-            - run: docker push hub.klickstartonline.com/app
-#       - run:
-#         name: Build docker image and publish to Private Hub
-#         command: |
-#           apt update
-#           apt add --no-cache zip openjdk11-jre-headless
-      # install sonarqube scanners
-      #- sonarqube/install-engine
+      - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
+      - run: docker build -t hub.klickstartonline.com/app .
+      - run: docker push hub.klickstartonline.com/app
 workflows:
     build-and-test:
       jobs:
