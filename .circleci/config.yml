@@ -9,8 +9,6 @@
           - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
           - run: docker build -t hub.klickstartonline.com/app .
           - run: docker push hub.klickstartonline.com/app
-      deploy:
-        steps:
           - run:
               name: Deploy Over SSH
               command: |
