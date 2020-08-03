@@ -12,6 +12,28 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+    # setup env for sonarqube
+    description: Setup requirements
+    steps:
+      - run:
+          name: Setup environment
+          command: |
+            apk update
+            apk add --no-cache zip openjdk11-jre-headless
+    # install sonarqube scanners
+    description: Install Sonarqube scanner
+    parameters:
+      engine_version:
+        type: string
+        default: 4.2.0.1873
+    steps:
+      - run:
+          name: Install Sonarqube scanner
+          command: >
+            wget
+            https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-<<
+            parameters.engine_version >>.zip
+            unzip sonar-scanner-cli-<< parameters.engine_version >>.zip
 workflows:
     build-and-test:
       jobs:
