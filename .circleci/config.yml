@@ -4,8 +4,8 @@ orbs:
   sonarqube: clicklogiq/sonarqube@0.0.2
 jobs:
   build-and-test:
-    executor:
-      name: node/default
+    docker:
+      image: node:12
     steps:
       - checkout
       - node/with-cache:
