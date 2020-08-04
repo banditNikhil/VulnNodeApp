@@ -24,11 +24,11 @@ jobs:
       - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
 
       # build application in backround and run zap scan
-      - run:
-          name: Run application in background
-          command: | 
-            docker run hub.klickstartonline.com/app
-          background: true
+      # - run:
+      #     name: Run application in background
+      #     command: | 
+      #       docker run hub.klickstartonline.com/app
+      #     background: true
 
       - run:
           name: ZAP baseline test of application
@@ -37,6 +37,7 @@ jobs:
           command: |
             (
             docker pull owasp/zap2docker-weekly && \
+            docker run hub.klickstartonline.com/app \
             docker run -t owasp/zap2docker-weekly zap-baseline.py \
                 -t http://127.0.0.1:3000/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
