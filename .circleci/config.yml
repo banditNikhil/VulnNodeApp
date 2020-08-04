@@ -35,14 +35,13 @@ workflows:
           filters:
             branches:
               only: master
-  # dep check
+  # dep check and deploy
   owasp:
     jobs:
       - owasp/commandline_owasp_dependency_check:
           arguments: >-
             --scan ./ --failOnCVSS 3
-  # deploy
-  deploy-master:
-    jobs:
-      - deploy
+      - deploy:
+        requires: owasp/commandline_owasp_dependency_check
+
 
