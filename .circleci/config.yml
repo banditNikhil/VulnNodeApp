@@ -28,17 +28,21 @@ jobs:
             ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
 workflows:
   version: 2
+  # build
   build-master:
     jobs:
       - build:
           filters:
             branches:
               only: master
+  # dep check
+  owasp:
+    jobs:
+      - owasp/commandline_owasp_dependency_check:
+          arguments: >-
+            --scan ./ --failOnCVSS 3
+  # deploy
   deploy-master:
     jobs:
       - deploy
-  # owasp:
-  #   jobs:
-  #     - owasp/commandline_owasp_dependency_check:
-  #         arguments: >-
-  #           --scan ./ --failOnCVSS 3
+
