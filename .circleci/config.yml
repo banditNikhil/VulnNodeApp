@@ -31,7 +31,7 @@ jobs:
             (
             docker pull owasp/zap2docker-weekly && ls &&\
             docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-baseline.py \
-                -c ./wrk/zap-baseline.conf \
+                -c /zap/wrk/zap-baseline.conf \
                 -t http://app.klickstartonline.com/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
