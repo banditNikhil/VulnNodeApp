@@ -30,11 +30,10 @@ jobs:
           command: |
             (
             docker pull owasp/zap2docker-weekly && ls &&\
-            docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly ls
-            #zap-baseline.py \
-             #   -c zap-baseline.conf \
-              #  -t http://app.klickstartonline.com/ || \
-            #if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
+            docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-baseline.py \
+                -c ./wrk/zap-baseline.conf \
+                -t http://app.klickstartonline.com/ || \
+            if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
 
       - run:
