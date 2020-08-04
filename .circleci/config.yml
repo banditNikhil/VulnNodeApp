@@ -42,6 +42,4 @@ workflows:
           arguments: >-
             --scan ./ --failOnCVSS 3
       - deploy:
-        requires: owasp/commandline_owasp_dependency_check
-
-
+          requires: owasp/commandline_owasp_dependency_check
