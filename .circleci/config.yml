@@ -24,3 +24,6 @@ workflows:
           filters:
             branches:
               only: master
+  owasp:
+    jobs:
+      - owasp/commandline_owasp_dependency_check
