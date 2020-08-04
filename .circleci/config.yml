@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   owasp: entur/owasp@0.0.10
 jobs:
+  # build app in docker
   build:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -10,6 +11,9 @@ jobs:
       - setup_remote_docker
       - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
       - run: docker build -t hub.klickstartonline.com/app .
+  # deploy docker to server
+  deploy:
+    steps:
       - run: docker push hub.klickstartonline.com/app
       - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
       - run:
@@ -24,6 +28,9 @@ workflows:
           filters:
             branches:
               only: master
+  deploy-master:
+    jobs:
+      - deploy
   # owasp:
   #   jobs:
   #     - owasp/commandline_owasp_dependency_check:
