@@ -13,6 +13,8 @@ jobs:
       - run: docker build -t hub.klickstartonline.com/app .
   # deploy docker to server
   deploy:
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - run: docker push hub.klickstartonline.com/app
       - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
