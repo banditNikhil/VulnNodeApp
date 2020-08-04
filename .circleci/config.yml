@@ -18,6 +18,7 @@ jobs:
     steps:
       - setup_remote_docker
       - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
+      - run: docker build -t hub.klickstartonline.com/app .
       - run: docker push hub.klickstartonline.com/app
       - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
       - run:
