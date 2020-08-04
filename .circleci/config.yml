@@ -40,7 +40,7 @@ workflows:
     jobs:
       - owasp/commandline_owasp_dependency_check:
           arguments: >-
-            --scan ./ --failOnCVSS 3
+            --scan ./ --failOnCVSS 7
       - deploy:
           requires: 
             - owasp/commandline_owasp_dependency_check
