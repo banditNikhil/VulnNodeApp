@@ -26,7 +26,7 @@ workflows:
               only: master
   owasp:
     jobs:
-      - owasp/commandline_owasp_dependency_check
+      - owasp/commandline_owasp_dependency_check:
           executor: java_11
           arguments: >-
             --scan ./ --failOnCVSS 7 --suppression
