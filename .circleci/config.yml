@@ -29,7 +29,7 @@ jobs:
           # error codes 2 & 3 indicate WARN or other, and should not break the run
           command: |
             (
-            docker pull owasp/zap2docker-weekly && \
+            docker pull owasp/zap2docker-weekly && ls &&\
             docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-baseline.py \
                 -c zap-baseline.conf \
                 -t http://app.klickstartonline.com/ || \
