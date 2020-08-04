@@ -13,11 +13,9 @@ jobs:
       - run: docker build -t hub.klickstartonline.com/app .
     
       # Run SCA
-      - run:
-        name: SCA Owasp dependency check
-        - owasp/commandline_owasp_dependency_check:
-            arguments: >-
-              --scan ./ --failOnCVSS 7
+      - owasp/commandline_owasp_dependency_check:
+          arguments: >-
+            --scan ./ --failOnCVSS 7
 
       # # owasp zap scan
       # - run:
