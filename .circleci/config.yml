@@ -30,7 +30,7 @@ jobs:
           command: |
             (
             docker pull owasp/zap2docker-stable && \
-            docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
+            docker run -v /tmp:/zap/wrk:rw -t owasp/zap2docker-stable zap-baseline.py \
                 -u https://raw.githubusercontent.com/banditNikhil/VulnNodeApp/master/zap-baseline.conf \
                 -r /zap/wrk/zap_report.html \
                 -t http://app.klickstartonline.com/ || \
@@ -40,10 +40,10 @@ jobs:
       - run:
           name: artifact confirmation
           command: |
-            ls
+            ls /tmp/
       # store zap report
       - store_artifacts:
-          path: ./zap_report.html
+          path: /tmp/zap_report.html
       # deploy          
       - run:
           name: Deploy Over SSH
