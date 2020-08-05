@@ -29,10 +29,10 @@ jobs:
           # error codes 2 & 3 indicate WARN or other, and should not break the run
           command: |
             (
-            docker pull owasp/zap2docker-weekly && ls && pwd &&\
-            docker run -v /home/circleci/project:/zap/wrk/ -t owasp/zap2docker-weekly ls /zap/wrk/ && \
-            date && docker run -v /home/circleci/project:/zap/wrk/ -t owasp/zap2docker-weekly zap-baseline.py \
-                -c zap-baseline.conf \
+            docker pull owasp/zap2docker-weekly \
+            # docker run -v /home/circleci/project:/zap/wrk/ -t owasp/zap2docker-weekly ls /zap/wrk/ && \
+            docker run -t owasp/zap2docker-weekly zap-baseline.py \
+                -u https://github.com/banditNikhil/VulnNodeApp/blob/master/zap-baseline.conf \
                 -t http://app.klickstartonline.com/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
