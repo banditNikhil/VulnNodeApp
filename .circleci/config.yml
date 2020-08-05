@@ -29,8 +29,8 @@ jobs:
           # error codes 2 & 3 indicate WARN or other, and should not break the run
           command: |
             (
-            docker pull owasp/zap2docker-weekly \
-            docker run -v /home/circleci/project:/zap/wrk/:rw -t owasp/zap2docker-weekly zap-baseline.py \
+            docker pull owasp/zap2docker-stable && \
+            docker run --v /home/circleci/project:/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
                 -u https://raw.githubusercontent.com/banditNikhil/VulnNodeApp/master/zap-baseline.conf \
                 -r zap_report.html \
                 -t http://app.klickstartonline.com/ || \
