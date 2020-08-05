@@ -31,12 +31,16 @@ jobs:
             (
             docker pull owasp/zap2docker-weekly \
             # docker run -v /home/circleci/project:/zap/wrk/ -t owasp/zap2docker-weekly ls /zap/wrk/ && \
-            docker run -t owasp/zap2docker-weekly zap-baseline.py \
+            docker run -v /home/circleci/project:/zap/wrk/:rw -t owasp/zap2docker-weekly zap-baseline.py \
                 -u https://raw.githubusercontent.com/banditNikhil/VulnNodeApp/master/zap-baseline.conf \
+                -r zap_report.html \
                 -t http://app.klickstartonline.com/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
-
+      # store zap report
+      - store_artifacts:
+          path: ./zap_report.html
+      # deploy          
       - run:
           name: Deploy Over SSH
           command: |
