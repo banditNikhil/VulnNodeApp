@@ -14,6 +14,12 @@ cyclonedx-bom -o bom.xml && ls &&
  }
  __HERE__
 
+
+echo $1
+echo $2
+
+head bom.json
+
 curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
 -H 'Content-Type: application/json' \
 -H 'X-API-Key: $1' \
