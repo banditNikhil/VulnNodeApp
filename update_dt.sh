@@ -21,5 +21,5 @@ head bom.json -n1
 
 curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
 -H 'Content-Type: application/json' \
--H 'X-API-Key: F64I0PwBb9lbHmdb7WHltagZfY6lWEcV' \
+-H 'X-API-Key: $1' \
 -d @bom.json
