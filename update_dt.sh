@@ -1,11 +1,11 @@
 #!/bin/bash
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - &&\
-sudo apt-get update && \
-sudo apt install npm && npm install && \
-sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module && \
-sudo apt install curl && \
-cyclonedx-bom -o bom.xml && ls && 
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - 
+sudo apt-get update 
+sudo apt install npm && npm install 
+sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module 
+sudo apt install curl 
+cyclonedx-bom -o bom.xml 
 
  cat > bom.json <<__HERE__                                                                                                                                                                      
  {
