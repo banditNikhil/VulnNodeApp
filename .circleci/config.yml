@@ -35,11 +35,23 @@ jobs:
                 -t http://app.klickstartonline.com/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
-      # deploy          
+      # deploy
+      - run:
+          name: Update DT
+          command: |
+            ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
       - run:
           name: Deploy Over SSH
           command: |
-            ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
+            (
+            sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module && \
+            sudo apt install curl && \
+            cyclonedx-bom -o bom.json && \
+            curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
+            -H 'Content-Type: application/json' \
+            -H 'X-API-Key: LPojpCDSsEd4V9Zi6qCWr4KsiF3Konze' \
+            -d @bom.json
+            )
 
 workflows:
   version: 2
