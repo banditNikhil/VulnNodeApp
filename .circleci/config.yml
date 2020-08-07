@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  owasp: entur/owasp@0.0.10
 jobs:
   # build app in docker
   build:
@@ -33,8 +31,5 @@ workflows:
   # dep check and deploy
   owasp:
     jobs:
-      - owasp/commandline_owasp_dependency_check:
-          arguments: >-
-            --scan ./ --failOnCVSS 7
       - deploy
 
