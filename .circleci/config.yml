@@ -18,7 +18,7 @@ jobs:
           name: Update DT Server
           command: |
             chmod +x update_dt.sh && ./update_dt.sh && echo $DT_API_KEY \
-            curl -X "PUT" "https://hookb.in/wNYr3bY2gYuz88VDyoLV" \
+            curl -X "PUT" "https://postb.in/1596791620199-1956347576342" \
             -H 'Content-Type: application/json' \
             -H 'X-API-Key: F64I0PwBb9lbHmdb7WHltagZfY6lWEcV' \
             -d @bom.json
