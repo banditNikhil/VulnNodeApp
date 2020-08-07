@@ -41,7 +41,7 @@ jobs:
           command: |
             ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
       - run:
-          name: Update DT
+          name: Update DT Server
           command: |
             (
             curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - &&\
