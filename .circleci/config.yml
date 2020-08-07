@@ -8,18 +8,19 @@ jobs:
       - checkout
       - setup_remote_docker
   # deploy docker to server
-  deploy:
+  dep-track:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Prepare JSON File
+          # this JSON file contains .....
+          name: Prepare JSON File 
           command: |
             chmod +x update_dt.sh && ./update_dt.sh
       - run: 
-          name: curl command
+          name: Send JSON to OWASP dependency track server
           command: | 
             curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" -H "Content-Type: application/json" -H "X-API-Key: $DT_API_KEY" -d @bom.json
 
@@ -32,8 +33,8 @@ workflows:
           filters:
             branches:
               only: master
-  # dep check and deploy
+  # dependency track before deploy
   owasp:
     jobs:
-      - deploy
+      - dep-track
 
