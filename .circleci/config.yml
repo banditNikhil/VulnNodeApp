@@ -18,7 +18,10 @@ jobs:
           name: Prepare JSON File
           command: |
             chmod +x update_dt.sh && ./update_dt.sh
-      - run: curl -X "PUT" "http://dt.klickstartonline.com:1337/api/v1/bom" -H "Content-Type: application/json" -H "X-API-Key: $DT_API_KEY" -d @bom.json
+      - run: 
+          name: curl command
+          command: | 
+            curl -X "PUT" "http://dt.klickstartonline.com:1337/api/v1/bom" -H 'Content-Type: application/json' -H 'X-API-Key: $DT_API_KEY' -d @bom.json
 
 workflows:
   version: 2
