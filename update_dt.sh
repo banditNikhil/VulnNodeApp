@@ -7,12 +7,12 @@ sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module
 sudo apt install curl 
 cyclonedx-bom -o bom.xml 
 
- cat > bom.json <<__HERE__                                                                                                                                                                      
- {
-   "project": "$2",
-   "scan": "$(cat bom.xml  |base64 -w 0 -)"
- }
- __HERE__
+cat > bom.json <<__HERE__
+{
+"project": "$2",
+"scan": "$(cat bom.xml |base64 -w 0 -)"
+}
+__HERE__
 
 
 echo $1
