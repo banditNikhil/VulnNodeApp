@@ -20,7 +20,7 @@ jobs:
             chmod +x update_dt.sh && ./update_dt.sh && \
             curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
             -H 'Content-Type: application/json' \
-            -H 'X-API-Key: $DT_API_KEY' \
+            -H 'X-API-Key: F64I0PwBb9lbHmdb7WHltagZfY6lWEcV' \
             -d @bom.json
 
 workflows:
