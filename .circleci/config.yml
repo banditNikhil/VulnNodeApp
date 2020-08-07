@@ -44,6 +44,8 @@ jobs:
           name: Update DT
           command: |
             (
+            curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - &&\
+            sudo apt-get update && \
             sudo apt install npm && \
             sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module && \
             sudo apt install curl && \
