@@ -13,13 +13,3 @@ cat > bom.json <<__HERE__
 "bom": "$(cat bom.xml |base64 -w 0 -)"
 }
 __HERE__
-
-echo $1
-echo $2
-
-head bom.json -n1
-
-curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
--H 'Content-Type: application/json' \
--H 'X-API-Key: $DT_API_KEY' \
--d @bom.json
