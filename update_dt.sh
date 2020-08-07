@@ -9,18 +9,17 @@ cyclonedx-bom -o bom.xml
 
 cat > bom.json <<__HERE__
 {
-"project": "$2",
+"project": "9c396cce-e68f-48a2-a342-38cc891b66a1",
 "bom": "$(cat bom.xml |base64 -w 0 -)"
 }
 __HERE__
 
-
 echo $1
 echo $2
 
-head bom.json
+head bom.json -n1
 
 curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" \
 -H 'Content-Type: application/json' \
--H 'X-API-Key: $1' \
+-H 'X-API-Key: F64I0PwBb9lbHmdb7WHltagZfY6lWEcV' \
 -d @bom.json
