@@ -37,13 +37,14 @@ jobs:
             )
       # deploy
       - run:
-          name: Update DT
+          name: Deploy Over SSH
           command: |
             ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
       - run:
-          name: Deploy Over SSH
+          name: Update DT
           command: |
             (
+            sudo apt install npm && \
             sudo npm -g install git+https://github.com/CycloneDX/cyclonedx-node-module && \
             sudo apt install curl && \
             cyclonedx-bom -o bom.json && \
