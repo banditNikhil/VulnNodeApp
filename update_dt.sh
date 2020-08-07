@@ -10,7 +10,7 @@ cyclonedx-bom -o bom.xml
 cat > bom.json <<__HERE__
 {
 "project": "$2",
-"scan": "$(cat bom.xml |base64 -w 0 -)"
+"bom": "$(cat bom.xml |base64 -w 0 -)"
 }
 __HERE__
 
