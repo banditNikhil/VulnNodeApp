@@ -9,8 +9,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-      - run: docker build -t hub.klickstartonline.com/app .
   # deploy docker to server
   deploy:
     docker:
@@ -18,28 +16,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: echo "$DOCKER_PASS" | docker login  hub.klickstartonline.com --username $DOCKER_USER --password-stdin
-      - run: docker build -t hub.klickstartonline.com/app .
-      - run: docker push hub.klickstartonline.com/app
-      - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
-      - run:
-          name: ZAP baseline test of application
-          # test 2
-          # Only fail on error code 1, which indicates at least one FAIL was found.
-          # error codes 2 & 3 indicate WARN or other, and should not break the run
-          command: |
-            (
-            docker pull owasp/zap2docker-stable && \
-            docker run -t owasp/zap2docker-stable zap-baseline.py \
-                -u https://raw.githubusercontent.com/banditNikhil/VulnNodeApp/master/zap-baseline.conf \
-                -t http://app.klickstartonline.com/ || \
-            if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
-            )
-      # deploy
-      - run:
-          name: Deploy Over SSH
-          command: |
-            ssh ubuntu@app.klickstartonline.com  "/home/ubuntu/VulnNodeApp/update.sh"
       - run:
           name: Update DT Server
           command: |
@@ -60,7 +36,5 @@ workflows:
       - owasp/commandline_owasp_dependency_check:
           arguments: >-
             --scan ./ --failOnCVSS 7
-      - deploy:
-          requires: 
-            - owasp/commandline_owasp_dependency_check
+      - deploy
 
