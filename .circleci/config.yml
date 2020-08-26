@@ -1,21 +1,20 @@
 version: 2.1
 jobs:
-  # deploy docker to server
+  # SAST using fortify
   SAST:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
-#       - checkout
       - setup_remote_docker
       - run: ssh-keyscan ec2-3-236-145-132.compute-1.amazonaws.com >> ~/.ssh/known_hosts
       - run:
-          name: SAST test on ssh with Fortify
+          name: SAST over ssh with Fortify instance
           command: |
             ssh ubuntu@ec2-3-236-145-132.compute-1.amazonaws.com "./scan_node_app.sh"
 
 workflows:
   version: 2
-  # dependency track before deploy
+  # SAST job
   sast-fortify:
     jobs:
       - SAST
