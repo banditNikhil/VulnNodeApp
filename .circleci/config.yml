@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
-      - checkout
+#       - checkout
       - setup_remote_docker
       - run: ssh-keyscan ec2-3-236-145-132.compute-1.amazonaws.com >> ~/.ssh/known_hosts
       - run:
