@@ -11,7 +11,7 @@ jobs:
       - run:
           name: SAST test on ssh with Fortify
           command: |
-            ssh ubuntu@ec2-3-236-145-132.compute-1.amazonaws.com "./scan_node_app.sh"
+            ssh ubuntu@3.236.145.132 "./scan_node_app.sh"
 
 workflows:
   version: 2
