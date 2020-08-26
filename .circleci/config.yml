@@ -7,34 +7,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-  # deploy docker to server
-  dep-track:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - setup_remote_docker
+
+  # SAST on fortify instance
+  deploy:       
       - run:
-          # this JSON file contains .....
-          name: Prepare JSON File 
+          name: Scan Over SSH on fortify instance
           command: |
-            chmod +x update_dt.sh && ./update_dt.sh
-      - run: 
-          name: Send JSON to OWASP dependency track server
-          command: | 
-            curl -X "PUT" "http://dt.klickstartonline.com:8080/api/v1/bom" -H "Content-Type: application/json" -H "X-API-Key: $DT_API_KEY" -d @bom.json
-
-workflows:
-  version: 2
-  # build
-  build-master:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-  # dependency track before deploy
-  owasp:
-    jobs:
-      - dep-track
-
+            ssh ubuntu@ec2-3-236-145-132.compute-1.amazonaws.com "./scan_node_app.sh"
+            
