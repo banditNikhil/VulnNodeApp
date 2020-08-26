@@ -9,7 +9,7 @@ jobs:
       - setup_remote_docker
 
   # SAST on fortify instance
-  deploy:       
+  SAST:       
       - run:
           name: Scan Over SSH on fortify instance
           command: |
