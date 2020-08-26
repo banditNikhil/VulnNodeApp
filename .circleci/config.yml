@@ -1,19 +1,12 @@
 version: 2.1
 jobs:
-  # build app in docker
-#   build:
-#     docker:
-#       - image: circleci/buildpack-deps:stretch
-#     steps:
-#       - checkout
-#       - setup_remote_docker
   # deploy docker to server
   SAST:
-    docker:
-      - image: circleci/buildpack-deps:stretch
+#     docker:
+#       - image: circleci/buildpack-deps:stretch
     steps:
-      - checkout
-      - setup_remote_docker
+#       - checkout
+#       - setup_remote_docker
       - run:
           name: SAST test on ssh with Fortify
           command: |
@@ -21,13 +14,6 @@ jobs:
 
 workflows:
   version: 2
-  # build
-#   build-master:
-#     jobs:
-#       - build:
-#           filters:
-#             branches:
-#               only: master
   # dependency track before deploy
   sast-fortify:
     jobs:
