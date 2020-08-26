@@ -8,6 +8,7 @@ jobs:
 #       - add_ssh_keys:
 #           fingerprints:
 #             - "35:3d:de:3b:8c:0f:a8:e9:25:6c:b0:52:6f:22:dc:38"
+      - run: ssh-keyscan app.klickstartonline.com >> ~/.ssh/known_hosts
       - run:
           name: SAST test on ssh with Fortify
           command: |
