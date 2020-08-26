@@ -1,12 +1,12 @@
 version: 2.1
 jobs:
   # build app in docker
-  build:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - setup_remote_docker
+#   build:
+#     docker:
+#       - image: circleci/buildpack-deps:stretch
+#     steps:
+#       - checkout
+#       - setup_remote_docker
   # deploy docker to server
   SAST:
     docker:
@@ -22,14 +22,14 @@ jobs:
 workflows:
   version: 2
   # build
-  build-master:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
+#   build-master:
+#     jobs:
+#       - build:
+#           filters:
+#             branches:
+#               only: master
   # dependency track before deploy
-  owasp:
+  sast-fortify:
     jobs:
       - SAST
 
